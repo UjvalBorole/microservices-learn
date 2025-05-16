@@ -1,14 +1,15 @@
 package com.lcwd.user.service.entities;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -30,4 +31,5 @@ public class User {
 
     @Transient  // -- that means this not store in db
     private List<Rating> ratings = new ArrayList<>();
+
 }
