@@ -7,6 +7,7 @@ import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 
 // import org.hibernate.engine.jdbc.env.internal.LobCreationLogging_.logger;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,7 +37,8 @@ public class UserController {
     //single user get
     @GetMapping("/{userId}")
 //    @CircuitBreaker(name = "ratingHotelBreaker", fallbackMethod = "ratingHotelFallback")
-    @Retry(name="ratingHotelService", fallbackMethod = "ratingHotelFallback")
+//    @Retry(name="ratingHotelService", fallbackMethod = "ratingHotelFallback")
+    @RateLimiter(name = "userRateLimiter", fallbackMethod = "ratingHotelFallback")
     public ResponseEntity<User>getSingleUser(@PathVariable String userId){
         logger.info("Get Single User Handler : UserController");
         logger.info("Retry count: {}",retryCount);
