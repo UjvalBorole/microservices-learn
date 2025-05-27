@@ -22,6 +22,21 @@ spring:
     # configuration servers common configuration that is used in every service
     config:
         import: "optional:configserver:http://localhost:8085"
+
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    issuer-uri: https://dev-15726617.okta.com/oauth2/default
+            client:
+                registration:
+                    my-internal-client:
+                        provider: okta
+                        authorization-grant-type: client_credentials
+                        scope: internal
+                        client-id: 0oaosp0mw1gJxz4Fo5d7
+                        client-secret: BOdze5qN3wlILmU0sHaqjpfWFPmoB59L7-a22FE5--geAu0KjRounRDS_X_v-srN
+
     # - spring.config.import.configserver=http://localhost:8085
 
     # profiles:
@@ -75,3 +90,8 @@ resilience4j.ratelimiter:
             limit-refresh-period: 4s
             limit-for-period: 2
             timeout-duration: 0s
+
+okta:
+    oauth2:
+        issuer: https://dev-15726617.okta.com/oauth2/default
+        audience: api://default
